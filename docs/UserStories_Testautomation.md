@@ -13,3 +13,9 @@ As a customer, I want to have a Favorites tab to the Tesco online food shopping 
 
 User Story5
 As a customer (Clubcard holder), I want to have a Clubcard functionality to the Tesco online food shopping so that I am able to buy the desired products at a special discounted price in case of having a Clubcard account registered and having been connected to the Tesco online shopping account.
+
+User Story6
+As a customer, I want to have a Search functionality for the products to the Tesco online food shopping so that I am able to ease the finding of the desired items.
+
+User Story7
+As a customer, I want to have a functionality for changing the language of the Tesco online food shopping so that I am able to see all the website contents in different languages.
