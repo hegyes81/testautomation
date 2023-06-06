@@ -32,12 +32,12 @@
         Then all products that contain <PRODUCT_FIRST PRODUCT_SECOND> or <PRODUCT_FIRST product_second> or <product_first product_second> name displayed in the search list
 
     Rule: Searching with case-sensitive search words
-      Scenario: Search with existing product name only consisting of uppercase letters
+      Scenario: Search with existing product name consisting of uppercase and lowercase letters
         When customer searches with the exact product name <PRODUCT_FIRST product_second> available in the product catalogue
         Then all products that contain <PRODUCT_FIRST PRODUCT_SECOND> or <PRODUCT_FIRST product_second> or <product_first product_second> name displayed in the search list
 
     Rule: Searching with case-sensitive search words
-      Scenario: Search with existing product name only consisting of uppercase letters
+      Scenario: Search with existing product name only consisting of lowercase letters
         When customer searches with the exact product name <product_first product_second> available in the product catalogue
         Then all products that contain <PRODUCT_FIRST PRODUCT_SECOND> or <PRODUCT_FIRST product_second> or <product_first product_second> name displayed in the search list
 
