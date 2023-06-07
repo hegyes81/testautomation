@@ -1,9 +1,13 @@
+package hu.masterfield.steps;
+
+import hu.masterfield.pages.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class TescoSteps {
+public class TescoSteps extends BasePage {
+
     @Given("customer is on the home page")
     public void customerIsOnTheHomePage() {
     }
@@ -24,6 +28,8 @@ public class TescoSteps {
     public void productsContainingProductNameAreDisplayed() {
     }
 
+
+    /**
     @Then("message is displayed with {string}")
     public void messageIsDisplayedWith(String arg0) {
     }
@@ -39,4 +45,5 @@ public class TescoSteps {
     @Then("message is displayed saying {string}")
     public void messageIsDisplayedSaying(String arg0) {
     }
+    **/
 }

@@ -13,7 +13,7 @@
         When searching for existing <product>
         Then products containing <product> name are displayed
 
-    Rule: Searching for a product available in the catalogue
+ """  Rule: Searching for a product available in the catalogue
       Scenario: Search with product name consisting of multiple words available in the catalogue
         When searching for existing <product_first product_second>
         Then products containing <product_first product_second> name are displayed
