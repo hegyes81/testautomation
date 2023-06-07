@@ -1,19 +1,36 @@
 // Gherkin format to the Product Search functionality
-
+@TC_All
 
   Feature: As a customer, I want to have a Search functionality for the products to the Tesco online food shopping so that I am able to ease the finding of the desired items.
 
     Background:
       Given customer is on the home page
       And all cookies are accepted
-      And language is set to Magyar
+      And language is set to "magyar"
 
+    @TC_ProductSearch_OK
     Rule: Searching for a product available in the catalogue
-      Scenario: Search with a product name consisting of only one word available in the catalogue
-        When searching for existing <product>
-        Then products containing <product> name are displayed
+      Scenario Outline: Search with a product name available in the catalogue
+        When searching for existing "<product>"
+        Then "<number_of_product>" are displayed
+        Examples:
+          | product       | number_of_product  |
+          | alpro         | 45                 |
+          | Alpro kokusz  | 2                  |
 
- """  Rule: Searching for a product available in the catalogue
+    @TC_ProductSearch_NOK
+    Rule: Searching for a product unavailable in the catalogue
+      Scenario Outline: Search with a product name consisting of only one word unavailable in the catalogue
+        When when searching for unavailable "<product>"
+        Then message is displayed with "Sajnos nem található olyan termék, amely a “<unavailable_product>” keresési feltételnek megfelelne."
+        Examples:
+          | product         | unavailable_product |
+          | cocomas         | cocomas             |
+          | mandula joghurt | mandula joghurt     |
+
+
+    """
+    Rule: Searching for a product available in the catalogue
       Scenario: Search with product name consisting of multiple words available in the catalogue
         When searching for existing <product_first product_second>
         Then products containing <product_first product_second> name are displayed
