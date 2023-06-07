@@ -52,7 +52,7 @@
         Then message is displayed with "Sajnos nem található olyan termék, amely a “?” keresési feltételnek megfelelne."
 
     Rule: Searching only with special characters
-      Scenario: Search with " "
+      Scenario: Search with special character " "
         When searching with " "
         Then message is displayed with "Sajnos nem található olyan termék, amely a “ ” keresési feltételnek megfelelne."
 
