@@ -48,12 +48,12 @@
 
     Rule: Searching only with special characters
       Scenario: Search with special character "?"
-        When customer searches with "?"
+        When searching with "?"
         Then message is displayed with "Sajnos nem található olyan termék, amely a “?” keresési feltételnek megfelelne."
 
     Rule: Searching only with special characters
       Scenario: Search with " "
-        When customer searches with " "
-        Then message is displayed saying "Sajnos nem található olyan termék, amely a “ ” keresési feltételnek megfelelne."
+        When searching with " "
+        Then message is displayed with "Sajnos nem található olyan termék, amely a “ ” keresési feltételnek megfelelne."
 
 
