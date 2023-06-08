@@ -1,7 +1,6 @@
-// Gherkin format to the Product Search functionality
+# Gherkin format to the Product Search functionality
 @TC_All
-
-  Feature: As a customer, I want to have a Search functionality for the products to the Tesco online food shopping so that I am able to ease the finding of the desired items.
+Feature: As a customer, I want to have a Search functionality for the products to the Tesco online food shopping so that I am able to ease the finding of the desired items.
 
     Background:
       Given customer is on the home page
@@ -28,8 +27,7 @@
           | cocomas         | cocomas             |
           | mandula joghurt | mandula joghurt     |
 
-
-    """
+################# NOT USED #################
     Rule: Searching for a product available in the catalogue
       Scenario: Search with product name consisting of multiple words available in the catalogue
         When searching for existing <product_first product_second>

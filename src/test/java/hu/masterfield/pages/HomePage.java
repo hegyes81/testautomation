@@ -1,5 +1,10 @@
 package hu.masterfield.pages;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePage extends BasePage {
 
@@ -13,12 +18,10 @@ public class HomePage extends BasePage {
     public void open() {
         driver.get("https://futar.bkk.hu");
         assertTrue(isLoaded(acceptCookiesButton));
-        // assert
     }
 
     public void acceptCookies() {
         acceptCookiesButton.click();
     }
-
 
 }

@@ -6,8 +6,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
@@ -21,31 +24,26 @@ public class BasePage {
 
     protected static WebDriverWait wait;
 
-    @Before // cucumber annotáció
-    public static void setup() throws IOException {
-        WebDriverManager.chromedriver().setup();
+    public BasePage(WebDriver driver) {
+        BasePage.driver = driver;
+        BasePage.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // loading arguments, properties
-        Properties props = new Properties(); // java.util
-        InputStream is = TescoSteps.class.getResourceAsStream("/browser.properties");
-        props.load(is);
-
-        // set chrome options
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
-        chromeOptions.addArguments(props.getProperty("chrome.arguments"));
-        // chromeOptions.setHeadless(true);
-
-        // init driver
-        driver = new ChromeDriver(chromeOptions);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        driver.manage().window().setSize(new Dimension(900, 900)); // ...selenium.Dimension
+        PageFactory.initElements(driver, this);
     }
 
-    @After
-    public static void cleanup() {
-        driver.quit();
+    // true - element is visible and displayed
+    public boolean isLoaded(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+    }
+
+    // true - element is clickable and enabled
+    public boolean isInteractable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
+    }
+
+    // get actual URL
+    public String getURL() {
+        return driver.getCurrentUrl();
     }
 
 }

@@ -1,14 +1,61 @@
 package hu.masterfield.steps;
 
-import hu.masterfield.pages.BasePage;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TescoSteps extends BasePage {
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.Duration;
+import java.util.Properties;
+
+import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.header;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TescoSteps {
+
+    protected static WebDriver driver;
+
+    protected static WebDriverWait wait;
+
+    @Before // cucumber annotáció
+    public static void setup() throws IOException {
+        WebDriverManager.chromedriver().setup();
+
+        // loading arguments, properties
+        Properties props = new Properties(); // java.util
+        InputStream is = TescoSteps.class.getResourceAsStream("/browser.properties");
+        props.load(is);
+
+        // set chrome options
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments(props.getProperty("chrome.arguments"));
+        chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
+        // chromeOptions.setHeadless(true);
+
+        // init driver
+        driver = new ChromeDriver(chromeOptions);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        driver.manage().window().setSize(new Dimension(900, 900)); // ...selenium.Dimension
+    }
+
+    @After /* cucumber-es */
+    public static void cleanup() {
+        driver.quit();
+    }
+
     @Given("customer is on the home page")
     public void customerIsOnTheHomePage() {
         driver.get("https://bevasarlas.tesco.hu/groceries/hu-HU");
@@ -16,30 +63,35 @@ public class TescoSteps extends BasePage {
 
     @And("all cookies are accepted")
     public void allCookiesAreAccepted() {
-
-        // #sticky-bar-cookie-wrapper > span > div > div > div.base-components__BaseElement-sc-1mosoyj-0.styled__ButtonContainer-sc-1vnc1v2-4.oznwo.ksIudk.beans-cookies-notification__buttons-container > form:nth-child(1) > button
-
-        WebElement acceptCookiesButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button")));
+        WebElement acceptCookiesButton =
+                wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button")));
         acceptCookiesButton.click();
     }
 
     @And("language is set to {string}")
-    public void languageIsSetTo(String arg0) {
+    public void languageIsSetTo(String lang) {
+
+         WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
+
+            if (languageButton.getText().equals("English")) {
+            assertEquals("English", languageButton.getText());
+        }
     }
 
     @When("searching for existing {string}")
     public void searchingForExisting(String product) {
-        areDisplayed(product);
+        /* megkeresed a keresés beviteli mezőt
+        * kitöltöd (sendkeys) a product változóval
+        * nagyító ikonra kattintás */
     }
-
-    /**@When("change the language to {string}")
-   // public void changeTheLanguageTo(String newLang) {
-        languageIsSetTo(newLang);
-    }
-    **/
 
     @Then("{string} are displayed")
-    public void areDisplayed(String arg0) {
+    public void areDisplayed(String numOfProducts) {
+        /* "190 termékből" -> //*[@id="product-list"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2] */
+        /* getText(); */
+        /* indexOf(numOfProducts) String.indexOf() -1 ??? assertEquals(numOfProducts, )
+        * System.out.println(); -- debuggolásra
+        * */
     }
 
     @When("when searching for unavailable {string}")
