@@ -97,8 +97,6 @@ public class TescoSteps {
         WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button")));
         searchIcon.click();
 
-        // //*[@id="search-form"]/button/span/svg
-
         /* megkeresed a keresés beviteli mezőt
          * kitöltöd (sendkeys) a product változóval
          * nagyító ikonra kattintás */
@@ -108,10 +106,8 @@ public class TescoSteps {
     public void areDisplayed(String numberOfProduct) {
 
         WebElement searchResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
-        System.out.println(searchResult);
-        // searchResult.getText().indexOf(numberOfProduct);
-        //System.out.println(searchResult.getText().indexOf(numberOfProduct));
-        //assertEquals(numberOfProduct, searchResult.getText().indexOf(numberOfProduct));
+        // System.out.println(searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));
+        assertEquals(numberOfProduct, searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));
 
         /* "190 termékből" -> //*[@id="product-list"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2] */
         /* getText(); */
@@ -121,10 +117,19 @@ public class TescoSteps {
     }
 
     @When("when searching for unavailable {string}")
-    public void whenSearchingForUnavailable(String arg0) {
+    public void whenSearchingForUnavailable(String product) {
+
+        WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
+        searchField.sendKeys(product);
+        WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button")));
+        searchIcon.click();
     }
 
     @Then("message is displayed with {string}")
-    public void messageIsDisplayedWith(String arg0) {
+    public void messageIsDisplayedWith(String unavailableProduct) {
+
+        WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
+        assertEquals(unavailableProduct, searchResultNoProduct.getText());
+
     }
 }

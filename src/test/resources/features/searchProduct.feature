@@ -21,9 +21,9 @@ Feature: As a customer, I want to have a Search functionality for the products t
     Rule: Searching for a product unavailable in the catalogue
       Scenario Outline: Search with a product name consisting of only one word unavailable in the catalogue
         When when searching for unavailable "<product>"
-        Then message is displayed with "Sajnos nem található olyan termék, amely a “<unavailable_product>” keresési feltételnek megfelelne."
+        Then message is displayed with "Sajnos nem található olyan termék, amely a “<unavailableProduct>” keresési feltételnek megfelelne."
         Examples:
-          | product         | unavailable_product |
+          | product         | unavailableProduct |
           | cocomas         | cocomas             |
           | mandula joghurt | mandula joghurt     |
 
