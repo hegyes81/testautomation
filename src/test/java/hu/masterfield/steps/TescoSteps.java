@@ -126,10 +126,14 @@ public class TescoSteps {
     }
 
     @Then("message is displayed with {string}")
-    public void messageIsDisplayedWith(String unavailableProduct) {
+    public void messageIsDisplayedWith(String messageNoProduct) {
 
-        WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
-        assertEquals(unavailableProduct, searchResultNoProduct.getText());
+
+         WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
+         assertEquals(messageNoProduct, searchResultNoProduct.getText());
+
+        // WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
+        // assertEquals(unavailableProduct, searchResultNoProduct.getText());
 
     }
 }
