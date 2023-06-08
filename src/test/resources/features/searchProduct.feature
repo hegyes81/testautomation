@@ -11,11 +11,11 @@ Feature: As a customer, I want to have a Search functionality for the products t
     Rule: Searching for a product available in the catalogue
       Scenario Outline: Search with a product name available in the catalogue
         When searching for existing "<product>"
-        Then "<number_of_product>" are displayed
+        Then "<numberOfProduct>" are displayed
         Examples:
-          | product       | number_of_product  |
-          | alpro         | 45                 |
-          | Alpro kokusz  | 2                  |
+          | product       | numberOfProduct  |
+          | alpro         | 45               |
+          | Alpro kokusz  | 2                |
 
     @TC_ProductSearch_NOK
     Rule: Searching for a product unavailable in the catalogue

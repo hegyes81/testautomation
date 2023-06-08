@@ -75,7 +75,7 @@ public class TescoSteps {
         /*  ide nem kell semmilyen ellenőrzés
             csak rá kell kattintani a gombra, hogy átálljon magyarra
         *  */
-        if (lang.equals("magyar")) {
+        if (lang.equals("Magyar")) {
             languageButton.click();
         }
     }
@@ -84,7 +84,7 @@ public class TescoSteps {
      * WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
      * <p>
      * if (languageButton.getText().equals("English")) {
-     * assertEquals("magyar", languageButton.getText());
+     * assertEquals("Magyar", languageButton.getText());
      * }
      **/
 
@@ -97,17 +97,21 @@ public class TescoSteps {
         WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button")));
         searchIcon.click();
 
+        // //*[@id="search-form"]/button/span/svg
+
         /* megkeresed a keresés beviteli mezőt
          * kitöltöd (sendkeys) a product változóval
          * nagyító ikonra kattintás */
     }
 
     @Then("{string} are displayed")
-    public void areDisplayed(String numOfProducts) {
+    public void areDisplayed(String numberOfProduct) {
 
-        WebElement searhResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
-        searhResult.getText();
-        System.out.println(searhResult);
+        WebElement searchResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
+        System.out.println(searchResult);
+        // searchResult.getText().indexOf(numberOfProduct);
+        //System.out.println(searchResult.getText().indexOf(numberOfProduct));
+        //assertEquals(numberOfProduct, searchResult.getText().indexOf(numberOfProduct));
 
         /* "190 termékből" -> //*[@id="product-list"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2] */
         /* getText(); */
