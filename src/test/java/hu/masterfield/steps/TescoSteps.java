@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.header;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TescoSteps {
@@ -71,18 +70,36 @@ public class TescoSteps {
     @And("language is set to {string}")
     public void languageIsSetTo(String lang) {
 
-         WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
+        WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
 
-            if (languageButton.getText().equals("English")) {
-            assertEquals("English", languageButton.getText());
+        /*  ide nem kell semmilyen ellenőrzés
+            csak rá kell kattintani a gombra, hogy átálljon magyarra
+        *  */
+        if (lang.equals("magyar")) {
+            languageButton.click();
         }
     }
 
+    /**
+     * WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
+     * <p>
+     * if (languageButton.getText().equals("English")) {
+     * assertEquals("magyar", languageButton.getText());
+     * }
+     **/
+
+
     @When("searching for existing {string}")
     public void searchingForExisting(String product) {
+
+        WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
+        searchField.sendKeys(product);
+        WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button/span/svg")));
+        searchIcon.click();
+
         /* megkeresed a keresés beviteli mezőt
-        * kitöltöd (sendkeys) a product változóval
-        * nagyító ikonra kattintás */
+         * kitöltöd (sendkeys) a product változóval
+         * nagyító ikonra kattintás */
     }
 
     @Then("{string} are displayed")
@@ -90,8 +107,8 @@ public class TescoSteps {
         /* "190 termékből" -> //*[@id="product-list"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2] */
         /* getText(); */
         /* indexOf(numOfProducts) String.indexOf() -1 ??? assertEquals(numOfProducts, )
-        * System.out.println(); -- debuggolásra
-        * */
+         * System.out.println(); -- debuggolásra
+         * */
     }
 
     @When("when searching for unavailable {string}")
