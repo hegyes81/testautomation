@@ -94,7 +94,7 @@ public class TescoSteps {
 
         WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
         searchField.sendKeys(product);
-        WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button/span/svg")));
+        WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button")));
         searchIcon.click();
 
         /* megkeresed a keresés beviteli mezőt
@@ -104,6 +104,11 @@ public class TescoSteps {
 
     @Then("{string} are displayed")
     public void areDisplayed(String numOfProducts) {
+
+        WebElement searhResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
+        searhResult.getText();
+        System.out.println(searhResult);
+
         /* "190 termékből" -> //*[@id="product-list"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2] */
         /* getText(); */
         /* indexOf(numOfProducts) String.indexOf() -1 ??? assertEquals(numOfProducts, )
