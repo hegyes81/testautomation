@@ -70,30 +70,24 @@ public class TescoSteps {
 
     @And("language is set to {string}")
     public void languageIsSetTo(String lang) {
-
+        HomePage hpage = new HomePage(driver);
+        hpage.setLanguage(lang);
+    }
+/**
         WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
-
-        /*  ide nem kell semmilyen ellenőrzés
-            csak rá kell kattintani a gombra, hogy átálljon magyarra
-        *  */
         if (lang.equals("Magyar")) {
             languageButton.click();
         }
     }
-
-    /**
-     * WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
-     * <p>
-     * if (languageButton.getText().equals("English")) {
-     * assertEquals("Magyar", languageButton.getText());
-     * }
-     **/
-
+**/
 
     @When("searching for existing {string}")
     public void searchingForExisting(String product) {
+        HomePage hpage = new HomePage(driver);
+        hpage.fillSearchField(product);
+        hpage.clickSearchButton();
 
-        WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
+ /**       WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
         searchField.sendKeys(product);
         WebElement searchIcon = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-form\"]/button")));
         searchIcon.click();
@@ -103,10 +97,13 @@ public class TescoSteps {
          * nagyító ikonra kattintás */
     }
 
+
     @Then("{string} are displayed")
     public void areDisplayed(String numberOfProduct) {
+        HomePage hpage = new HomePage(driver);
+        hpage.validateSearchResult();
 
-        WebElement searchResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
+     /**   WebElement searchResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
         // System.out.println(searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));
         assertEquals(numberOfProduct, searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));
 
@@ -132,6 +129,7 @@ public class TescoSteps {
 
          WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
          assertEquals(messageNoProduct, searchResultNoProduct.getText());
+
 
         // WebElement searchResultNoProduct = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div/div[2]/h3")));
         // assertEquals(unavailableProduct, searchResultNoProduct.getText());
