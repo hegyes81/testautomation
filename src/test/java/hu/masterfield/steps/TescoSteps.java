@@ -1,6 +1,7 @@
 package hu.masterfield.steps;
 
 import hu.masterfield.pages.HomePage;
+import hu.masterfield.pages.SearchResultPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -85,7 +86,7 @@ public class TescoSteps {
     public void searchingForExisting(String product) {
         HomePage hpage = new HomePage(driver);
         hpage.fillSearchField(product);
-        hpage.clickSearchButton();
+        hpage.searchProduct();
 
  /**       WebElement searchField = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"search-input\"]")));
         searchField.sendKeys(product);
@@ -100,8 +101,8 @@ public class TescoSteps {
 
     @Then("{string} are displayed")
     public void areDisplayed(String numberOfProduct) {
-        HomePage hpage = new HomePage(driver);
-        hpage.validateSearchResult();
+        SearchResultPage srpage = new SearchResultPage(driver);
+        srpage.validateSearchResult(numberOfProduct);
 
      /**   WebElement searchResult = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")));
         // System.out.println(searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));

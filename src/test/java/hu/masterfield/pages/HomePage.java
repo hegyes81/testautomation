@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static org.junit.jupiter.api.AssertEquals.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,8 +22,6 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"search-form\"]/button")
     WebElement searchButton;
 
-    @FindBy(xpath = "//*[@id=\"product-list\"]/div[2]/div[3]/div[1]/div/div[1]/div[1]/div[1]/strong[2]")
-    WebElement searchResult;
 
     /**   WebElement languageButton = wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"utility-header-language-switch-link\"]/span/span")));
      if (lang.equals("Magyar")) {
@@ -63,14 +60,10 @@ public class HomePage extends BasePage {
 
     }
 
-    public void clickSearchButton() {
+    public void searchProduct() {
         searchButton.click();
     }
 
-    public validateSearchResult() {
-        return assertEquals(numberOfProduct, searchResult.getText().substring(0, searchResult.getText().indexOf(" ")));
-
-    }
     public HomePage(WebDriver driver) {
         super(driver);
     }
