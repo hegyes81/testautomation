@@ -1,5 +1,6 @@
 package hu.masterfield.steps;
 
+import hu.masterfield.pages.HomePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -57,14 +58,14 @@ public class TescoSteps {
 
     @Given("customer is on the home page")
     public void customerIsOnTheHomePage() {
-        driver.get("https://bevasarlas.tesco.hu/groceries/hu-HU");
+        HomePage hpage = new HomePage(driver);
+        hpage.getURL();
     }
 
     @And("all cookies are accepted")
     public void allCookiesAreAccepted() {
-        WebElement acceptCookiesButton =
-                wait.until(driver -> driver.findElement(By.xpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button")));
-        acceptCookiesButton.click();
+        HomePage hpage = new HomePage(driver);
+        hpage.acceptCookies();
     }
 
     @And("language is set to {string}")

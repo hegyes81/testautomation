@@ -31,19 +31,6 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    // true - element is visible and displayed
-    public boolean isLoaded(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
-    }
-
-    // true - element is clickable and enabled
-    public boolean isInteractable(WebElement element) {
-        return wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
-    }
-
-    // get actual URL
-    public String getURL() {
-        return driver.getCurrentUrl();
-    }
 
 }
+
